@@ -1,0 +1,934 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Cooperativa_2023Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="CUENTA_ID" />
+          </Key>
+          <Property Name="CUENTA_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCUENTA_ID" Type="int" />
+          <Property Name="SUCURSAL_ID" Type="bigint" />
+          <Property Name="PERSONA_ID" Type="bigint" />
+          <Property Name="USU_PERSONA_ID" Type="bigint" />
+          <Property Name="CUENTA_NUMERO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CUENTA_FECHAEMISION" Type="datetime" Nullable="false" />
+          <Property Name="CUENTA_ESTADO" Type="bit" Nullable="false" />
+          <Property Name="CUENTA_SALDO" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="bigint" Nullable="false" />
+          <Property Name="EMPLEADO_FECHAINGRESO" Type="datetime" Nullable="false" />
+          <Property Name="EMPLEADO_FECHASALIDA" Type="datetime" />
+          <Property Name="EMPLEADO_SALARIO" Type="money" Nullable="false" />
+          <Property Name="EMPLEADO_CARGO" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADO_SUCURSAL">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+            <PropertyRef Name="SUCURSAL_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="bigint" Nullable="false" />
+          <Property Name="SUCURSAL_ID" Type="bigint" Nullable="false" />
+          <Property Name="EMPSUC_FECHAINGRESO" Type="datetime" Nullable="false" />
+          <Property Name="EMPSUC_FECHASALIDA" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PERSONA_CEDULA_RUC" Type="varchar" MaxLength="20" />
+          <Property Name="PERSONA_NOMBRES" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PERSONA_APELLIDOS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PERSONA_FECHANACIMIENTO" Type="datetime" Nullable="false" />
+          <Property Name="PERSONA_DIRECCION" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PERSONA_TELEFONO" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="PERSONA_EMAIL" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="SOCIO">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="bigint" Nullable="false" />
+          <Property Name="SUCURSAL_ID" Type="bigint" />
+          <Property Name="USU_PERSONA_ID" Type="bigint" />
+          <Property Name="SOCIO_FECHAEMISION" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUCURSAL">
+          <Key>
+            <PropertyRef Name="SUCURSAL_ID" />
+          </Key>
+          <Property Name="SUCURSAL_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PERSONA_ID" Type="bigint" />
+          <Property Name="SUCURSAL_DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SUCURSAL_DIRECCION" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SUCURSAL_TELEFONO" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="SUCURSAL_ESTADO" Type="bit" Nullable="false" />
+          <Property Name="SUCURSAL_MATRIZ" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_CUENTA">
+          <Key>
+            <PropertyRef Name="TCUENTA_ID" />
+          </Key>
+          <Property Name="TCUENTA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCUENTA_DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_TRANSACCION">
+          <Key>
+            <PropertyRef Name="TTRANSACCION_ID" />
+          </Key>
+          <Property Name="TTRANSACCION_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TTRANSACCION_DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TTRANSACCION_FACTOR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRANSACCION">
+          <Key>
+            <PropertyRef Name="TRANSACCION_ID" />
+          </Key>
+          <Property Name="TRANSACCION_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CUENTA_ID" Type="bigint" />
+          <Property Name="SUCURSAL_ID" Type="bigint" />
+          <Property Name="TTRANSACCION_ID" Type="int" />
+          <Property Name="PERSONA_ID" Type="bigint" />
+          <Property Name="TRANSACCION_FECHA" Type="datetime" Nullable="false" />
+          <Property Name="TRANSACCION_MONTO" Type="money" Nullable="false" />
+          <Property Name="TRANSACCION_REFERENCIA" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="bigint" Nullable="false" />
+          <Property Name="USUARIO_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="USUARIO_PASSWORD" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="USUARIO_ESTADO" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CUENTA_CUENTA_SU_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_SOCIO_CUE_SOCIO">
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_TIPO_CUEN_TIPO_CUE">
+          <End Role="TIPO_CUENTA" Type="Self.TIPO_CUENTA" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CUENTA">
+              <PropertyRef Name="TCUENTA_ID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="TCUENTA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_USUARIO_C_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="USU_PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_INHERITAN_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_RELATIONS_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="EMPLEADO_SUCURSAL" Type="Self.EMPLEADO_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="EMPLEADO_SUCURSAL">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_RELATIONS_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+          <End Role="EMPLEADO_SUCURSAL" Type="Self.EMPLEADO_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="EMPLEADO_SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIO_INHERITAN_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="SOCIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIO_SOCIO_SUC_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="SOCIO">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIO_USUARIO_S_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="SOCIO">
+              <PropertyRef Name="USU_PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUCURSAL_GERENTE_S_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="SUCURSAL">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_CUENTA_TR_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="0..1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="CUENTA_ID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="CUENTA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_TIPO_TRAN_TIPO_TRA">
+          <End Role="TIPO_TRANSACCION" Type="Self.TIPO_TRANSACCION" Multiplicity="0..1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_TRANSACCION">
+              <PropertyRef Name="TTRANSACCION_ID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TTRANSACCION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_TRANSACCI_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_USUARIO_T_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_INHERITAN_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Cooperativa_2023ModelStoreContainer">
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO_SUCURSAL" EntityType="Self.EMPLEADO_SUCURSAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SOCIO" EntityType="Self.SOCIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_CUENTA" EntityType="Self.TIPO_CUENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_TRANSACCION" EntityType="Self.TIPO_TRANSACCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANSACCION" EntityType="Self.TRANSACCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CUENTA_CUENTA_SU_SUCURSAL" Association="Self.FK_CUENTA_CUENTA_SU_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_SOCIO_CUE_SOCIO" Association="Self.FK_CUENTA_SOCIO_CUE_SOCIO">
+            <End Role="SOCIO" EntitySet="SOCIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_TIPO_CUEN_TIPO_CUE" Association="Self.FK_CUENTA_TIPO_CUEN_TIPO_CUE">
+            <End Role="TIPO_CUENTA" EntitySet="TIPO_CUENTA" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_USUARIO_C_USUARIO" Association="Self.FK_CUENTA_USUARIO_C_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_INHERITAN_PERSONA" Association="Self.FK_EMPLEADO_INHERITAN_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_RELATIONS_EMPLEADO" Association="Self.FK_EMPLEADO_RELATIONS_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="EMPLEADO_SUCURSAL" EntitySet="EMPLEADO_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_RELATIONS_SUCURSAL" Association="Self.FK_EMPLEADO_RELATIONS_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="EMPLEADO_SUCURSAL" EntitySet="EMPLEADO_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIO_INHERITAN_PERSONA" Association="Self.FK_SOCIO_INHERITAN_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="SOCIO" EntitySet="SOCIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIO_SOCIO_SUC_SUCURSAL" Association="Self.FK_SOCIO_SOCIO_SUC_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="SOCIO" EntitySet="SOCIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIO_USUARIO_S_USUARIO" Association="Self.FK_SOCIO_USUARIO_S_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="SOCIO" EntitySet="SOCIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUCURSAL_GERENTE_S_EMPLEADO" Association="Self.FK_SUCURSAL_GERENTE_S_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_CUENTA_TR_CUENTA" Association="Self.FK_TRANSACC_CUENTA_TR_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_TIPO_TRAN_TIPO_TRA" Association="Self.FK_TRANSACC_TIPO_TRAN_TIPO_TRA">
+            <End Role="TIPO_TRANSACCION" EntitySet="TIPO_TRANSACCION" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_TRANSACCI_SUCURSAL" Association="Self.FK_TRANSACC_TRANSACCI_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_USUARIO_T_USUARIO" Association="Self.FK_TRANSACC_USUARIO_T_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_INHERITAN_EMPLEADO" Association="Self.FK_USUARIO_INHERITAN_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Cooperativa_2023Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="CUENTA_ID" />
+          </Key>
+          <Property Name="CUENTA_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCUENTA_ID" Type="Int32" />
+          <Property Name="SUCURSAL_ID" Type="Int64" />
+          <Property Name="PERSONA_ID" Type="Int64" />
+          <Property Name="USU_PERSONA_ID" Type="Int64" />
+          <Property Name="CUENTA_NUMERO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUENTA_FECHAEMISION" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CUENTA_ESTADO" Type="Boolean" Nullable="false" />
+          <Property Name="CUENTA_SALDO" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_CUENTA_CUENTA_SU_SUCURSAL" FromRole="CUENTA" ToRole="SUCURSAL" />
+          <NavigationProperty Name="SOCIO" Relationship="Self.FK_CUENTA_SOCIO_CUE_SOCIO" FromRole="CUENTA" ToRole="SOCIO" />
+          <NavigationProperty Name="TIPO_CUENTA" Relationship="Self.FK_CUENTA_TIPO_CUEN_TIPO_CUE" FromRole="CUENTA" ToRole="TIPO_CUENTA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_CUENTA_USUARIO_C_USUARIO" FromRole="CUENTA" ToRole="USUARIO" />
+          <NavigationProperty Name="TRANSACCION" Relationship="Self.FK_TRANSACC_CUENTA_TR_CUENTA" FromRole="CUENTA" ToRole="TRANSACCION" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="Int64" Nullable="false" />
+          <Property Name="EMPLEADO_FECHAINGRESO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EMPLEADO_FECHASALIDA" Type="DateTime" Precision="3" />
+          <Property Name="EMPLEADO_SALARIO" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="EMPLEADO_CARGO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.FK_EMPLEADO_INHERITAN_PERSONA" FromRole="EMPLEADO" ToRole="PERSONA" />
+          <NavigationProperty Name="EMPLEADO_SUCURSAL" Relationship="Self.FK_EMPLEADO_RELATIONS_EMPLEADO" FromRole="EMPLEADO" ToRole="EMPLEADO_SUCURSAL" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_SUCURSAL_GERENTE_S_EMPLEADO" FromRole="EMPLEADO" ToRole="SUCURSAL" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_INHERITAN_EMPLEADO" FromRole="EMPLEADO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="EMPLEADO_SUCURSAL">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+            <PropertyRef Name="SUCURSAL_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="Int64" Nullable="false" />
+          <Property Name="SUCURSAL_ID" Type="Int64" Nullable="false" />
+          <Property Name="EMPSUC_FECHAINGRESO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EMPSUC_FECHASALIDA" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_EMPLEADO_RELATIONS_EMPLEADO" FromRole="EMPLEADO_SUCURSAL" ToRole="EMPLEADO" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_EMPLEADO_RELATIONS_SUCURSAL" FromRole="EMPLEADO_SUCURSAL" ToRole="SUCURSAL" />
+        </EntityType>
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PERSONA_CEDULA_RUC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PERSONA_NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PERSONA_APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PERSONA_FECHANACIMIENTO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PERSONA_DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PERSONA_TELEFONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PERSONA_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_EMPLEADO_INHERITAN_PERSONA" FromRole="PERSONA" ToRole="EMPLEADO" />
+          <NavigationProperty Name="SOCIO" Relationship="Self.FK_SOCIO_INHERITAN_PERSONA" FromRole="PERSONA" ToRole="SOCIO" />
+        </EntityType>
+        <EntityType Name="SOCIO">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="Int64" Nullable="false" />
+          <Property Name="SUCURSAL_ID" Type="Int64" />
+          <Property Name="USU_PERSONA_ID" Type="Int64" />
+          <Property Name="SOCIO_FECHAEMISION" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_SOCIO_CUE_SOCIO" FromRole="SOCIO" ToRole="CUENTA" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.FK_SOCIO_INHERITAN_PERSONA" FromRole="SOCIO" ToRole="PERSONA" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_SOCIO_SOCIO_SUC_SUCURSAL" FromRole="SOCIO" ToRole="SUCURSAL" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_SOCIO_USUARIO_S_USUARIO" FromRole="SOCIO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="SUCURSAL">
+          <Key>
+            <PropertyRef Name="SUCURSAL_ID" />
+          </Key>
+          <Property Name="SUCURSAL_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PERSONA_ID" Type="Int64" />
+          <Property Name="SUCURSAL_DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUCURSAL_DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUCURSAL_TELEFONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUCURSAL_ESTADO" Type="Boolean" Nullable="false" />
+          <Property Name="SUCURSAL_MATRIZ" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_CUENTA_SU_SUCURSAL" FromRole="SUCURSAL" ToRole="CUENTA" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_SUCURSAL_GERENTE_S_EMPLEADO" FromRole="SUCURSAL" ToRole="EMPLEADO" />
+          <NavigationProperty Name="EMPLEADO_SUCURSAL" Relationship="Self.FK_EMPLEADO_RELATIONS_SUCURSAL" FromRole="SUCURSAL" ToRole="EMPLEADO_SUCURSAL" />
+          <NavigationProperty Name="SOCIO" Relationship="Self.FK_SOCIO_SOCIO_SUC_SUCURSAL" FromRole="SUCURSAL" ToRole="SOCIO" />
+          <NavigationProperty Name="TRANSACCION" Relationship="Self.FK_TRANSACC_TRANSACCI_SUCURSAL" FromRole="SUCURSAL" ToRole="TRANSACCION" />
+        </EntityType>
+        <EntityType Name="TIPO_CUENTA">
+          <Key>
+            <PropertyRef Name="TCUENTA_ID" />
+          </Key>
+          <Property Name="TCUENTA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCUENTA_DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_TIPO_CUEN_TIPO_CUE" FromRole="TIPO_CUENTA" ToRole="CUENTA" />
+        </EntityType>
+        <EntityType Name="TIPO_TRANSACCION">
+          <Key>
+            <PropertyRef Name="TTRANSACCION_ID" />
+          </Key>
+          <Property Name="TTRANSACCION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TTRANSACCION_DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TTRANSACCION_FACTOR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TRANSACCION" Relationship="Self.FK_TRANSACC_TIPO_TRAN_TIPO_TRA" FromRole="TIPO_TRANSACCION" ToRole="TRANSACCION" />
+        </EntityType>
+        <EntityType Name="TRANSACCION">
+          <Key>
+            <PropertyRef Name="TRANSACCION_ID" />
+          </Key>
+          <Property Name="TRANSACCION_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CUENTA_ID" Type="Int64" />
+          <Property Name="SUCURSAL_ID" Type="Int64" />
+          <Property Name="TTRANSACCION_ID" Type="Int32" />
+          <Property Name="PERSONA_ID" Type="Int64" />
+          <Property Name="TRANSACCION_FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TRANSACCION_MONTO" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TRANSACCION_REFERENCIA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_TRANSACC_CUENTA_TR_CUENTA" FromRole="TRANSACCION" ToRole="CUENTA" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_TRANSACC_TRANSACCI_SUCURSAL" FromRole="TRANSACCION" ToRole="SUCURSAL" />
+          <NavigationProperty Name="TIPO_TRANSACCION" Relationship="Self.FK_TRANSACC_TIPO_TRAN_TIPO_TRA" FromRole="TRANSACCION" ToRole="TIPO_TRANSACCION" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_TRANSACC_USUARIO_T_USUARIO" FromRole="TRANSACCION" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="PERSONA_ID" />
+          </Key>
+          <Property Name="PERSONA_ID" Type="Int64" Nullable="false" />
+          <Property Name="USUARIO_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USUARIO_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USUARIO_ESTADO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_USUARIO_C_USUARIO" FromRole="USUARIO" ToRole="CUENTA" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_USUARIO_INHERITAN_EMPLEADO" FromRole="USUARIO" ToRole="EMPLEADO" />
+          <NavigationProperty Name="SOCIO" Relationship="Self.FK_SOCIO_USUARIO_S_USUARIO" FromRole="USUARIO" ToRole="SOCIO" />
+          <NavigationProperty Name="TRANSACCION" Relationship="Self.FK_TRANSACC_USUARIO_T_USUARIO" FromRole="USUARIO" ToRole="TRANSACCION" />
+        </EntityType>
+        <Association Name="FK_CUENTA_CUENTA_SU_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_SOCIO_CUE_SOCIO">
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_TIPO_CUEN_TIPO_CUE">
+          <End Role="TIPO_CUENTA" Type="Self.TIPO_CUENTA" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CUENTA">
+              <PropertyRef Name="TCUENTA_ID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="TCUENTA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_USUARIO_C_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="USU_PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_CUENTA_TR_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="0..1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="CUENTA_ID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="CUENTA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_INHERITAN_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_RELATIONS_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="EMPLEADO_SUCURSAL" Type="Self.EMPLEADO_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="EMPLEADO_SUCURSAL">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUCURSAL_GERENTE_S_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="SUCURSAL">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_INHERITAN_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_RELATIONS_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+          <End Role="EMPLEADO_SUCURSAL" Type="Self.EMPLEADO_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="EMPLEADO_SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIO_INHERITAN_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="SOCIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIO_SOCIO_SUC_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="SOCIO">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIO_USUARIO_S_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="SOCIO">
+              <PropertyRef Name="USU_PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_TRANSACCI_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_TIPO_TRAN_TIPO_TRA">
+          <End Role="TIPO_TRANSACCION" Type="Self.TIPO_TRANSACCION" Multiplicity="0..1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_TRANSACCION">
+              <PropertyRef Name="TTRANSACCION_ID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TTRANSACCION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_USUARIO_T_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PERSONA_ID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="PERSONA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Cooperativa_2023Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+          <EntitySet Name="EMPLEADO_SUCURSAL" EntityType="Self.EMPLEADO_SUCURSAL" />
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" />
+          <EntitySet Name="SOCIO" EntityType="Self.SOCIO" />
+          <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" />
+          <EntitySet Name="TIPO_CUENTA" EntityType="Self.TIPO_CUENTA" />
+          <EntitySet Name="TIPO_TRANSACCION" EntityType="Self.TIPO_TRANSACCION" />
+          <EntitySet Name="TRANSACCION" EntityType="Self.TRANSACCION" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK_CUENTA_CUENTA_SU_SUCURSAL" Association="Self.FK_CUENTA_CUENTA_SU_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_SOCIO_CUE_SOCIO" Association="Self.FK_CUENTA_SOCIO_CUE_SOCIO">
+            <End Role="SOCIO" EntitySet="SOCIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_TIPO_CUEN_TIPO_CUE" Association="Self.FK_CUENTA_TIPO_CUEN_TIPO_CUE">
+            <End Role="TIPO_CUENTA" EntitySet="TIPO_CUENTA" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_USUARIO_C_USUARIO" Association="Self.FK_CUENTA_USUARIO_C_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_CUENTA_TR_CUENTA" Association="Self.FK_TRANSACC_CUENTA_TR_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_INHERITAN_PERSONA" Association="Self.FK_EMPLEADO_INHERITAN_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_RELATIONS_EMPLEADO" Association="Self.FK_EMPLEADO_RELATIONS_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="EMPLEADO_SUCURSAL" EntitySet="EMPLEADO_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUCURSAL_GERENTE_S_EMPLEADO" Association="Self.FK_SUCURSAL_GERENTE_S_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_INHERITAN_EMPLEADO" Association="Self.FK_USUARIO_INHERITAN_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_RELATIONS_SUCURSAL" Association="Self.FK_EMPLEADO_RELATIONS_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="EMPLEADO_SUCURSAL" EntitySet="EMPLEADO_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIO_INHERITAN_PERSONA" Association="Self.FK_SOCIO_INHERITAN_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="SOCIO" EntitySet="SOCIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIO_SOCIO_SUC_SUCURSAL" Association="Self.FK_SOCIO_SOCIO_SUC_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="SOCIO" EntitySet="SOCIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIO_USUARIO_S_USUARIO" Association="Self.FK_SOCIO_USUARIO_S_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="SOCIO" EntitySet="SOCIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_TRANSACCI_SUCURSAL" Association="Self.FK_TRANSACC_TRANSACCI_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_TIPO_TRAN_TIPO_TRA" Association="Self.FK_TRANSACC_TIPO_TRAN_TIPO_TRA">
+            <End Role="TIPO_TRANSACCION" EntitySet="TIPO_TRANSACCION" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_USUARIO_T_USUARIO" Association="Self.FK_TRANSACC_USUARIO_T_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Cooperativa_2023ModelStoreContainer" CdmEntityContainer="Cooperativa_2023Entities">
+          <EntitySetMapping Name="CUENTA">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.CUENTA">
+              <MappingFragment StoreEntitySet="CUENTA">
+                <ScalarProperty Name="CUENTA_ID" ColumnName="CUENTA_ID" />
+                <ScalarProperty Name="TCUENTA_ID" ColumnName="TCUENTA_ID" />
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="PERSONA_ID" ColumnName="PERSONA_ID" />
+                <ScalarProperty Name="USU_PERSONA_ID" ColumnName="USU_PERSONA_ID" />
+                <ScalarProperty Name="CUENTA_NUMERO" ColumnName="CUENTA_NUMERO" />
+                <ScalarProperty Name="CUENTA_FECHAEMISION" ColumnName="CUENTA_FECHAEMISION" />
+                <ScalarProperty Name="CUENTA_ESTADO" ColumnName="CUENTA_ESTADO" />
+                <ScalarProperty Name="CUENTA_SALDO" ColumnName="CUENTA_SALDO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.EMPLEADO">
+              <MappingFragment StoreEntitySet="EMPLEADO">
+                <ScalarProperty Name="PERSONA_ID" ColumnName="PERSONA_ID" />
+                <ScalarProperty Name="EMPLEADO_FECHAINGRESO" ColumnName="EMPLEADO_FECHAINGRESO" />
+                <ScalarProperty Name="EMPLEADO_FECHASALIDA" ColumnName="EMPLEADO_FECHASALIDA" />
+                <ScalarProperty Name="EMPLEADO_SALARIO" ColumnName="EMPLEADO_SALARIO" />
+                <ScalarProperty Name="EMPLEADO_CARGO" ColumnName="EMPLEADO_CARGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO_SUCURSAL">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.EMPLEADO_SUCURSAL">
+              <MappingFragment StoreEntitySet="EMPLEADO_SUCURSAL">
+                <ScalarProperty Name="PERSONA_ID" ColumnName="PERSONA_ID" />
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="EMPSUC_FECHAINGRESO" ColumnName="EMPSUC_FECHAINGRESO" />
+                <ScalarProperty Name="EMPSUC_FECHASALIDA" ColumnName="EMPSUC_FECHASALIDA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONA">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.PERSONA">
+              <MappingFragment StoreEntitySet="PERSONA">
+                <ScalarProperty Name="PERSONA_ID" ColumnName="PERSONA_ID" />
+                <ScalarProperty Name="PERSONA_CEDULA_RUC" ColumnName="PERSONA_CEDULA_RUC" />
+                <ScalarProperty Name="PERSONA_NOMBRES" ColumnName="PERSONA_NOMBRES" />
+                <ScalarProperty Name="PERSONA_APELLIDOS" ColumnName="PERSONA_APELLIDOS" />
+                <ScalarProperty Name="PERSONA_FECHANACIMIENTO" ColumnName="PERSONA_FECHANACIMIENTO" />
+                <ScalarProperty Name="PERSONA_DIRECCION" ColumnName="PERSONA_DIRECCION" />
+                <ScalarProperty Name="PERSONA_TELEFONO" ColumnName="PERSONA_TELEFONO" />
+                <ScalarProperty Name="PERSONA_EMAIL" ColumnName="PERSONA_EMAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOCIO">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.SOCIO">
+              <MappingFragment StoreEntitySet="SOCIO">
+                <ScalarProperty Name="PERSONA_ID" ColumnName="PERSONA_ID" />
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="USU_PERSONA_ID" ColumnName="USU_PERSONA_ID" />
+                <ScalarProperty Name="SOCIO_FECHAEMISION" ColumnName="SOCIO_FECHAEMISION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUCURSAL">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.SUCURSAL">
+              <MappingFragment StoreEntitySet="SUCURSAL">
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="PERSONA_ID" ColumnName="PERSONA_ID" />
+                <ScalarProperty Name="SUCURSAL_DESCRIPCION" ColumnName="SUCURSAL_DESCRIPCION" />
+                <ScalarProperty Name="SUCURSAL_DIRECCION" ColumnName="SUCURSAL_DIRECCION" />
+                <ScalarProperty Name="SUCURSAL_TELEFONO" ColumnName="SUCURSAL_TELEFONO" />
+                <ScalarProperty Name="SUCURSAL_ESTADO" ColumnName="SUCURSAL_ESTADO" />
+                <ScalarProperty Name="SUCURSAL_MATRIZ" ColumnName="SUCURSAL_MATRIZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CUENTA">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.TIPO_CUENTA">
+              <MappingFragment StoreEntitySet="TIPO_CUENTA">
+                <ScalarProperty Name="TCUENTA_ID" ColumnName="TCUENTA_ID" />
+                <ScalarProperty Name="TCUENTA_DESCRIPCION" ColumnName="TCUENTA_DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_TRANSACCION">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.TIPO_TRANSACCION">
+              <MappingFragment StoreEntitySet="TIPO_TRANSACCION">
+                <ScalarProperty Name="TTRANSACCION_ID" ColumnName="TTRANSACCION_ID" />
+                <ScalarProperty Name="TTRANSACCION_DESCRIPCION" ColumnName="TTRANSACCION_DESCRIPCION" />
+                <ScalarProperty Name="TTRANSACCION_FACTOR" ColumnName="TTRANSACCION_FACTOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSACCION">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.TRANSACCION">
+              <MappingFragment StoreEntitySet="TRANSACCION">
+                <ScalarProperty Name="TRANSACCION_ID" ColumnName="TRANSACCION_ID" />
+                <ScalarProperty Name="CUENTA_ID" ColumnName="CUENTA_ID" />
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="TTRANSACCION_ID" ColumnName="TTRANSACCION_ID" />
+                <ScalarProperty Name="PERSONA_ID" ColumnName="PERSONA_ID" />
+                <ScalarProperty Name="TRANSACCION_FECHA" ColumnName="TRANSACCION_FECHA" />
+                <ScalarProperty Name="TRANSACCION_MONTO" ColumnName="TRANSACCION_MONTO" />
+                <ScalarProperty Name="TRANSACCION_REFERENCIA" ColumnName="TRANSACCION_REFERENCIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="Cooperativa_2023Model.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="PERSONA_ID" ColumnName="PERSONA_ID" />
+                <ScalarProperty Name="USUARIO_NAME" ColumnName="USUARIO_NAME" />
+                <ScalarProperty Name="USUARIO_PASSWORD" ColumnName="USUARIO_PASSWORD" />
+                <ScalarProperty Name="USUARIO_ESTADO" ColumnName="USUARIO_ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

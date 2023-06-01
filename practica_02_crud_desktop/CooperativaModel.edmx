@@ -1,0 +1,1288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_CooperativaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CREDITO">
+          <Key>
+            <PropertyRef Name="CreditoID" />
+          </Key>
+          <Property Name="CreditoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CuentaID" Type="int" Nullable="false" />
+          <Property Name="TipoCreditoID" Type="int" Nullable="false" />
+          <Property Name="CreditoMonto" Type="money" Nullable="false" />
+          <Property Name="CreditoActivo" Type="bit" Nullable="false" />
+          <Property Name="CreditoFechaEntrega" Type="datetime" Nullable="false" />
+          <Property Name="CreditoPlazo" Type="int" Nullable="false" />
+          <Property Name="CreditoGaranteID1" Type="int" Nullable="false" />
+          <Property Name="CreditoGaranteID2" Type="int" />
+          <Property Name="UsuarioIDResponsable" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="CuentaID" />
+          </Key>
+          <Property Name="CuentaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SocioID" Type="int" Nullable="false" />
+          <Property Name="CuentaActiva" Type="bit" Nullable="false" />
+          <Property Name="CuentaNotas" Type="varchar" MaxLength="50" />
+          <Property Name="CuentaSaldo" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="CuentaFechaRegistro" Type="datetime" />
+          <Property Name="CuentaFechaBaja" Type="datetime" />
+          <Property Name="UsuarioIDRegistra" Type="int" />
+          <Property Name="UsuarioIDBaja" Type="int" />
+          <Property Name="SucursalID" Type="int" Nullable="false" />
+          <Property Name="TipoCuentaID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE_CREDITO">
+          <Key>
+            <PropertyRef Name="DetalleCreditoID" />
+          </Key>
+          <Property Name="DetalleCreditoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreditoID" Type="int" Nullable="false" />
+          <Property Name="DetalleCreditoNumeroCuota" Type="int" Nullable="false" />
+          <Property Name="DetalleCreditoFechaPago" Type="datetime" />
+          <Property Name="DetalleCreditoFechaPagoEsperado" Type="datetime" Nullable="false" />
+          <Property Name="DetalleCreditoInteres" Type="money" Nullable="false" />
+          <Property Name="DetalleCreditoInteresMora" Type="money" />
+          <Property Name="DetalleUsuarioCobra" Type="int" />
+          <Property Name="DetalleCapitalAmortizado" Type="money" Nullable="false" />
+          <Property Name="DetalleCreditoNotas" Type="varchar" MaxLength="200" />
+          <Property Name="DetalleCapitalPendiente" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="PersonaID" />
+          </Key>
+          <Property Name="PersonaID" Type="int" Nullable="false" />
+          <Property Name="EmpleadoEstado" Type="bit" Nullable="false" />
+          <Property Name="EmpleadoFechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="EmpleadoFechaBaja" Type="datetime" />
+          <Property Name="EmpleadoNotas" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_Cooperativa.dbo.PERMISOWS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PERMISOWS">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Contraseña" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="PersonaID" />
+          </Key>
+          <Property Name="PersonaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonaIdentificacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PersonaNombres" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PersonaApellidos" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PersonaRazonSocial" Type="varchar" MaxLength="100" />
+          <Property Name="PersonaDireccion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PersonaTelefono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PersonaNatural" Type="bit" />
+          <Property Name="TipoIdentificacionID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SOCIO">
+          <Key>
+            <PropertyRef Name="PersonaID" />
+          </Key>
+          <Property Name="PersonaID" Type="int" Nullable="false" />
+          <Property Name="SocioActivo" Type="bit" Nullable="false" />
+          <Property Name="SocioFechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="SocioFechaBaja" Type="datetime" />
+          <Property Name="SocioNotas" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SUCURSAL">
+          <Key>
+            <PropertyRef Name="SucursalID" />
+          </Key>
+          <Property Name="SucursalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SucursalNombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SucursalDireccion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SucursalCiudad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SucursalActiva" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TIPO_CREDITO">
+          <Key>
+            <PropertyRef Name="TipoCreditoID" />
+          </Key>
+          <Property Name="TipoCreditoID" Type="int" Nullable="false" />
+          <Property Name="NombreTipoCredito" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TipoCreditoNotas" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TIPO_CUENTA">
+          <Key>
+            <PropertyRef Name="TipoCuentaID" />
+          </Key>
+          <Property Name="TipoCuentaID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoCuentaNombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_IDENTIFICACION">
+          <Key>
+            <PropertyRef Name="TipoIdentificacionID" />
+          </Key>
+          <Property Name="TipoIdentificacionID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoIdentificacionNombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_TRANSACCION">
+          <Key>
+            <PropertyRef Name="TipoTransaccionID" />
+          </Key>
+          <Property Name="TipoTransaccionID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TipoTransaccionNombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRANSACCION">
+          <Key>
+            <PropertyRef Name="TransaccionID" />
+          </Key>
+          <Property Name="TransaccionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransaccionCuentaID" Type="int" Nullable="false" />
+          <Property Name="TransaccionFecha" Type="datetime" Nullable="false" />
+          <Property Name="TransaccionMonto" Type="money" Nullable="false" />
+          <Property Name="TransaccionActiva" Type="bit" Nullable="false" />
+          <Property Name="TipoTransaccionID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TransaccionUsuarioRegistraID" Type="int" Nullable="false" />
+          <Property Name="TransaccionSucursalID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="PersonaID" />
+          </Key>
+          <Property Name="PersonaID" Type="int" Nullable="false" />
+          <Property Name="UsuarioID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UsuarioPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UsuarioActivo" Type="bit" Nullable="false" />
+          <Property Name="UsuarioNotas" Type="varchar" MaxLength="200" />
+          <Property Name="UsuarioDiscapacidad" Type="bit" />
+          <Property Name="UsuarioPermisoChat" Type="bit" />
+          <Property Name="UsuarioPermisoRecargas" Type="bit" />
+          <Property Name="UsuarioPermisoGestionarCuentas" Type="bit" />
+        </EntityType>
+        <Association Name="FK_CREDITO_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="CuentaID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="CuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CREDITO_PERSONA_GARANTE1">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="CreditoGaranteID1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CREDITO_PERSONA_GARANTE2">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="0..1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="CreditoGaranteID2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CREDITO_TIPO_CREDITO">
+          <End Role="TIPO_CREDITO" Type="Self.TIPO_CREDITO" Multiplicity="1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CREDITO">
+              <PropertyRef Name="TipoCreditoID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="TipoCreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CREDITO_USUARIO_RESPONSABLE">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="UsuarioIDResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_SOCIO">
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="SocioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_TIPO_CUENTA">
+          <End Role="TIPO_CUENTA" Type="Self.TIPO_CUENTA" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CUENTA">
+              <PropertyRef Name="TipoCuentaID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="TipoCuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_USUARIO_BAJA">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="UsuarioIDBaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_USUARIO_REGISTRA">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="UsuarioIDRegistra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_CREDITO_CREDITO">
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="1" />
+          <End Role="DETALLE_CREDITO" Type="Self.DETALLE_CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CREDITO">
+              <PropertyRef Name="CreditoID" />
+            </Principal>
+            <Dependent Role="DETALLE_CREDITO">
+              <PropertyRef Name="CreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_CREDITO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="DETALLE_CREDITO" Type="Self.DETALLE_CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="DETALLE_CREDITO">
+              <PropertyRef Name="DetalleUsuarioCobra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="PersonaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONA_TIPO_IDENTIFICACION">
+          <End Role="TIPO_IDENTIFICACION" Type="Self.TIPO_IDENTIFICACION" Multiplicity="1" />
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_IDENTIFICACION">
+              <PropertyRef Name="TipoIdentificacionID" />
+            </Principal>
+            <Dependent Role="PERSONA">
+              <PropertyRef Name="TipoIdentificacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIO_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="SOCIO">
+              <PropertyRef Name="PersonaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACCION_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="CuentaID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TransaccionCuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACCION_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TransaccionSucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACCION_TIPO_TRANSACCION">
+          <End Role="TIPO_TRANSACCION" Type="Self.TIPO_TRANSACCION" Multiplicity="1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_TRANSACCION">
+              <PropertyRef Name="TipoTransaccionID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TipoTransaccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACCION_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TransaccionUsuarioRegistraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_CooperativaModelStoreContainer">
+          <EntitySet Name="CREDITO" EntityType="Self.CREDITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_CREDITO" EntityType="Self.DETALLE_CREDITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SOCIO" EntityType="Self.SOCIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_CREDITO" EntityType="Self.TIPO_CREDITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_CUENTA" EntityType="Self.TIPO_CUENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_IDENTIFICACION" EntityType="Self.TIPO_IDENTIFICACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_TRANSACCION" EntityType="Self.TIPO_TRANSACCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANSACCION" EntityType="Self.TRANSACCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISOWS" EntityType="Self.PERMISOWS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PERMISOWS].[Id] AS [Id], 
+    [PERMISOWS].[Contraseña] AS [Contraseña]
+    FROM [dbo].[PERMISOWS] AS [PERMISOWS]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CREDITO_CUENTA" Association="Self.FK_CREDITO_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CREDITO_PERSONA_GARANTE1" Association="Self.FK_CREDITO_PERSONA_GARANTE1">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CREDITO_PERSONA_GARANTE2" Association="Self.FK_CREDITO_PERSONA_GARANTE2">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CREDITO_TIPO_CREDITO" Association="Self.FK_CREDITO_TIPO_CREDITO">
+            <End Role="TIPO_CREDITO" EntitySet="TIPO_CREDITO" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CREDITO_USUARIO_RESPONSABLE" Association="Self.FK_CREDITO_USUARIO_RESPONSABLE">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_SOCIO" Association="Self.FK_CUENTA_SOCIO">
+            <End Role="SOCIO" EntitySet="SOCIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_SUCURSAL" Association="Self.FK_CUENTA_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_TIPO_CUENTA" Association="Self.FK_CUENTA_TIPO_CUENTA">
+            <End Role="TIPO_CUENTA" EntitySet="TIPO_CUENTA" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_USUARIO_BAJA" Association="Self.FK_CUENTA_USUARIO_BAJA">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_USUARIO_REGISTRA" Association="Self.FK_CUENTA_USUARIO_REGISTRA">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_CREDITO_CREDITO" Association="Self.FK_DETALLE_CREDITO_CREDITO">
+            <End Role="CREDITO" EntitySet="CREDITO" />
+            <End Role="DETALLE_CREDITO" EntitySet="DETALLE_CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_CREDITO_USUARIO" Association="Self.FK_DETALLE_CREDITO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="DETALLE_CREDITO" EntitySet="DETALLE_CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_PERSONA" Association="Self.FK_EMPLEADO_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONA_TIPO_IDENTIFICACION" Association="Self.FK_PERSONA_TIPO_IDENTIFICACION">
+            <End Role="TIPO_IDENTIFICACION" EntitySet="TIPO_IDENTIFICACION" />
+            <End Role="PERSONA" EntitySet="PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIO_PERSONA" Association="Self.FK_SOCIO_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="SOCIO" EntitySet="SOCIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACCION_CUENTA" Association="Self.FK_TRANSACCION_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACCION_SUCURSAL" Association="Self.FK_TRANSACCION_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACCION_TIPO_TRANSACCION" Association="Self.FK_TRANSACCION_TIPO_TRANSACCION">
+            <End Role="TIPO_TRANSACCION" EntitySet="TIPO_TRANSACCION" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACCION_USUARIO" Association="Self.FK_TRANSACCION_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_EMPLEADO" Association="Self.FK_USUARIO_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_CooperativaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CREDITO">
+          <Key>
+            <PropertyRef Name="CreditoID" />
+          </Key>
+          <Property Name="CreditoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CuentaID" Type="Int32" Nullable="false" />
+          <Property Name="TipoCreditoID" Type="Int32" Nullable="false" />
+          <Property Name="CreditoMonto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CreditoActivo" Type="Boolean" Nullable="false" />
+          <Property Name="CreditoFechaEntrega" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreditoPlazo" Type="Int32" Nullable="false" />
+          <Property Name="CreditoGaranteID1" Type="Int32" Nullable="false" />
+          <Property Name="CreditoGaranteID2" Type="Int32" />
+          <Property Name="UsuarioIDResponsable" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CREDITO_CUENTA" FromRole="CREDITO" ToRole="CUENTA" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.FK_CREDITO_PERSONA_GARANTE1" FromRole="CREDITO" ToRole="PERSONA" />
+          <NavigationProperty Name="PERSONA1" Relationship="Self.FK_CREDITO_PERSONA_GARANTE2" FromRole="CREDITO" ToRole="PERSONA" />
+          <NavigationProperty Name="TIPO_CREDITO" Relationship="Self.FK_CREDITO_TIPO_CREDITO" FromRole="CREDITO" ToRole="TIPO_CREDITO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_CREDITO_USUARIO_RESPONSABLE" FromRole="CREDITO" ToRole="USUARIO" />
+          <NavigationProperty Name="DETALLE_CREDITO" Relationship="Self.FK_DETALLE_CREDITO_CREDITO" FromRole="CREDITO" ToRole="DETALLE_CREDITO" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="CuentaID" />
+          </Key>
+          <Property Name="CuentaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SocioID" Type="Int32" Nullable="false" />
+          <Property Name="CuentaActiva" Type="Boolean" Nullable="false" />
+          <Property Name="CuentaNotas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CuentaSaldo" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CuentaFechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="CuentaFechaBaja" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioIDRegistra" Type="Int32" />
+          <Property Name="UsuarioIDBaja" Type="Int32" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="TipoCuentaID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CREDITO" Relationship="Self.FK_CREDITO_CUENTA" FromRole="CUENTA" ToRole="CREDITO" />
+          <NavigationProperty Name="SOCIO" Relationship="Self.FK_CUENTA_SOCIO" FromRole="CUENTA" ToRole="SOCIO" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_CUENTA_SUCURSAL" FromRole="CUENTA" ToRole="SUCURSAL" />
+          <NavigationProperty Name="TIPO_CUENTA" Relationship="Self.FK_CUENTA_TIPO_CUENTA" FromRole="CUENTA" ToRole="TIPO_CUENTA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_CUENTA_USUARIO_BAJA" FromRole="CUENTA" ToRole="USUARIO" />
+          <NavigationProperty Name="USUARIO1" Relationship="Self.FK_CUENTA_USUARIO_REGISTRA" FromRole="CUENTA" ToRole="USUARIO" />
+          <NavigationProperty Name="TRANSACCION" Relationship="Self.FK_TRANSACCION_CUENTA" FromRole="CUENTA" ToRole="TRANSACCION" />
+        </EntityType>
+        <EntityType Name="DETALLE_CREDITO">
+          <Key>
+            <PropertyRef Name="DetalleCreditoID" />
+          </Key>
+          <Property Name="DetalleCreditoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreditoID" Type="Int32" Nullable="false" />
+          <Property Name="DetalleCreditoNumeroCuota" Type="Int32" Nullable="false" />
+          <Property Name="DetalleCreditoFechaPago" Type="DateTime" Precision="3" />
+          <Property Name="DetalleCreditoFechaPagoEsperado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DetalleCreditoInteres" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DetalleCreditoInteresMora" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DetalleUsuarioCobra" Type="Int32" />
+          <Property Name="DetalleCapitalAmortizado" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DetalleCreditoNotas" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DetalleCapitalPendiente" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="CREDITO" Relationship="Self.FK_DETALLE_CREDITO_CREDITO" FromRole="DETALLE_CREDITO" ToRole="CREDITO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_DETALLE_CREDITO_USUARIO" FromRole="DETALLE_CREDITO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="PersonaID" />
+          </Key>
+          <Property Name="PersonaID" Type="Int32" Nullable="false" />
+          <Property Name="EmpleadoEstado" Type="Boolean" Nullable="false" />
+          <Property Name="EmpleadoFechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmpleadoFechaBaja" Type="DateTime" Precision="3" />
+          <Property Name="EmpleadoNotas" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.FK_EMPLEADO_PERSONA" FromRole="EMPLEADO" ToRole="PERSONA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_EMPLEADO" FromRole="EMPLEADO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="PersonaID" />
+          </Key>
+          <Property Name="PersonaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonaIdentificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonaNombres" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonaApellidos" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonaRazonSocial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PersonaDireccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonaTelefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonaNatural" Type="Boolean" />
+          <Property Name="TipoIdentificacionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CREDITO" Relationship="Self.FK_CREDITO_PERSONA_GARANTE1" FromRole="PERSONA" ToRole="CREDITO" />
+          <NavigationProperty Name="CREDITO1" Relationship="Self.FK_CREDITO_PERSONA_GARANTE2" FromRole="PERSONA" ToRole="CREDITO" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_EMPLEADO_PERSONA" FromRole="PERSONA" ToRole="EMPLEADO" />
+          <NavigationProperty Name="TIPO_IDENTIFICACION" Relationship="Self.FK_PERSONA_TIPO_IDENTIFICACION" FromRole="PERSONA" ToRole="TIPO_IDENTIFICACION" />
+          <NavigationProperty Name="SOCIO" Relationship="Self.FK_SOCIO_PERSONA" FromRole="PERSONA" ToRole="SOCIO" />
+        </EntityType>
+        <EntityType Name="SOCIO">
+          <Key>
+            <PropertyRef Name="PersonaID" />
+          </Key>
+          <Property Name="PersonaID" Type="Int32" Nullable="false" />
+          <Property Name="SocioActivo" Type="Boolean" Nullable="false" />
+          <Property Name="SocioFechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SocioFechaBaja" Type="DateTime" Precision="3" />
+          <Property Name="SocioNotas" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_SOCIO" FromRole="SOCIO" ToRole="CUENTA" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.FK_SOCIO_PERSONA" FromRole="SOCIO" ToRole="PERSONA" />
+        </EntityType>
+        <EntityType Name="SUCURSAL">
+          <Key>
+            <PropertyRef Name="SucursalID" />
+          </Key>
+          <Property Name="SucursalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SucursalNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SucursalDireccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SucursalCiudad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SucursalActiva" Type="Boolean" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_SUCURSAL" FromRole="SUCURSAL" ToRole="CUENTA" />
+          <NavigationProperty Name="TRANSACCION" Relationship="Self.FK_TRANSACCION_SUCURSAL" FromRole="SUCURSAL" ToRole="TRANSACCION" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TIPO_CREDITO">
+          <Key>
+            <PropertyRef Name="TipoCreditoID" />
+          </Key>
+          <Property Name="TipoCreditoID" Type="Int32" Nullable="false" />
+          <Property Name="NombreTipoCredito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoCreditoNotas" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CREDITO" Relationship="Self.FK_CREDITO_TIPO_CREDITO" FromRole="TIPO_CREDITO" ToRole="CREDITO" />
+        </EntityType>
+        <EntityType Name="TIPO_CUENTA">
+          <Key>
+            <PropertyRef Name="TipoCuentaID" />
+          </Key>
+          <Property Name="TipoCuentaID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoCuentaNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_TIPO_CUENTA" FromRole="TIPO_CUENTA" ToRole="CUENTA" />
+        </EntityType>
+        <EntityType Name="TIPO_IDENTIFICACION">
+          <Key>
+            <PropertyRef Name="TipoIdentificacionID" />
+          </Key>
+          <Property Name="TipoIdentificacionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoIdentificacionNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.FK_PERSONA_TIPO_IDENTIFICACION" FromRole="TIPO_IDENTIFICACION" ToRole="PERSONA" />
+        </EntityType>
+        <EntityType Name="TIPO_TRANSACCION">
+          <Key>
+            <PropertyRef Name="TipoTransaccionID" />
+          </Key>
+          <Property Name="TipoTransaccionID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoTransaccionNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TRANSACCION" Relationship="Self.FK_TRANSACCION_TIPO_TRANSACCION" FromRole="TIPO_TRANSACCION" ToRole="TRANSACCION" />
+        </EntityType>
+        <EntityType Name="TRANSACCION">
+          <Key>
+            <PropertyRef Name="TransaccionID" />
+          </Key>
+          <Property Name="TransaccionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransaccionCuentaID" Type="Int32" Nullable="false" />
+          <Property Name="TransaccionFecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransaccionMonto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TransaccionActiva" Type="Boolean" Nullable="false" />
+          <Property Name="TipoTransaccionID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TransaccionUsuarioRegistraID" Type="Int32" Nullable="false" />
+          <Property Name="TransaccionSucursalID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_TRANSACCION_CUENTA" FromRole="TRANSACCION" ToRole="CUENTA" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_TRANSACCION_SUCURSAL" FromRole="TRANSACCION" ToRole="SUCURSAL" />
+          <NavigationProperty Name="TIPO_TRANSACCION" Relationship="Self.FK_TRANSACCION_TIPO_TRANSACCION" FromRole="TRANSACCION" ToRole="TIPO_TRANSACCION" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_TRANSACCION_USUARIO" FromRole="TRANSACCION" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="PersonaID" />
+          </Key>
+          <Property Name="PersonaID" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsuarioPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsuarioActivo" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioNotas" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioDiscapacidad" Type="Boolean" />
+          <Property Name="UsuarioPermisoChat" Type="Boolean" />
+          <Property Name="UsuarioPermisoRecargas" Type="Boolean" />
+          <Property Name="UsuarioPermisoGestionarCuentas" Type="Boolean" />
+          <NavigationProperty Name="CREDITO" Relationship="Self.FK_CREDITO_USUARIO_RESPONSABLE" FromRole="USUARIO" ToRole="CREDITO" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_USUARIO_BAJA" FromRole="USUARIO" ToRole="CUENTA" />
+          <NavigationProperty Name="CUENTA1" Relationship="Self.FK_CUENTA_USUARIO_REGISTRA" FromRole="USUARIO" ToRole="CUENTA" />
+          <NavigationProperty Name="DETALLE_CREDITO" Relationship="Self.FK_DETALLE_CREDITO_USUARIO" FromRole="USUARIO" ToRole="DETALLE_CREDITO" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_USUARIO_EMPLEADO" FromRole="USUARIO" ToRole="EMPLEADO" />
+          <NavigationProperty Name="TRANSACCION" Relationship="Self.FK_TRANSACCION_USUARIO" FromRole="USUARIO" ToRole="TRANSACCION" />
+        </EntityType>
+        <EntityType Name="PERMISOWS">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Contraseña" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CREDITO_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="CuentaID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="CuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CREDITO_PERSONA_GARANTE1">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="CreditoGaranteID1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CREDITO_PERSONA_GARANTE2">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="0..1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="CreditoGaranteID2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CREDITO_TIPO_CREDITO">
+          <End Role="TIPO_CREDITO" Type="Self.TIPO_CREDITO" Multiplicity="1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CREDITO">
+              <PropertyRef Name="TipoCreditoID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="TipoCreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CREDITO_USUARIO_RESPONSABLE">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="UsuarioIDResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_CREDITO_CREDITO">
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="1" />
+          <End Role="DETALLE_CREDITO" Type="Self.DETALLE_CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CREDITO">
+              <PropertyRef Name="CreditoID" />
+            </Principal>
+            <Dependent Role="DETALLE_CREDITO">
+              <PropertyRef Name="CreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_SOCIO">
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="SocioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_TIPO_CUENTA">
+          <End Role="TIPO_CUENTA" Type="Self.TIPO_CUENTA" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CUENTA">
+              <PropertyRef Name="TipoCuentaID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="TipoCuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_USUARIO_BAJA">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="UsuarioIDBaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_USUARIO_REGISTRA">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="UsuarioIDRegistra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACCION_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="CuentaID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TransaccionCuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_CREDITO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="DETALLE_CREDITO" Type="Self.DETALLE_CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="DETALLE_CREDITO">
+              <PropertyRef Name="DetalleUsuarioCobra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="PersonaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONA_TIPO_IDENTIFICACION">
+          <End Role="TIPO_IDENTIFICACION" Type="Self.TIPO_IDENTIFICACION" Multiplicity="1" />
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_IDENTIFICACION">
+              <PropertyRef Name="TipoIdentificacionID" />
+            </Principal>
+            <Dependent Role="PERSONA">
+              <PropertyRef Name="TipoIdentificacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIO_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SOCIO" Type="Self.SOCIO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="SOCIO">
+              <PropertyRef Name="PersonaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACCION_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TransaccionSucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACCION_TIPO_TRANSACCION">
+          <End Role="TIPO_TRANSACCION" Type="Self.TIPO_TRANSACCION" Multiplicity="1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_TRANSACCION">
+              <PropertyRef Name="TipoTransaccionID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TipoTransaccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACCION_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="TRANSACCION" Type="Self.TRANSACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="PersonaID" />
+            </Principal>
+            <Dependent Role="TRANSACCION">
+              <PropertyRef Name="TransaccionUsuarioRegistraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_CooperativaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CREDITO" EntityType="Self.CREDITO" />
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" />
+          <EntitySet Name="DETALLE_CREDITO" EntityType="Self.DETALLE_CREDITO" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" />
+          <EntitySet Name="SOCIO" EntityType="Self.SOCIO" />
+          <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TIPO_CREDITO" EntityType="Self.TIPO_CREDITO" />
+          <EntitySet Name="TIPO_CUENTA" EntityType="Self.TIPO_CUENTA" />
+          <EntitySet Name="TIPO_IDENTIFICACION" EntityType="Self.TIPO_IDENTIFICACION" />
+          <EntitySet Name="TIPO_TRANSACCION" EntityType="Self.TIPO_TRANSACCION" />
+          <EntitySet Name="TRANSACCION" EntityType="Self.TRANSACCION" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <EntitySet Name="PERMISOWS" EntityType="Self.PERMISOWS" />
+          <AssociationSet Name="FK_CREDITO_CUENTA" Association="Self.FK_CREDITO_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CREDITO_PERSONA_GARANTE1" Association="Self.FK_CREDITO_PERSONA_GARANTE1">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CREDITO_PERSONA_GARANTE2" Association="Self.FK_CREDITO_PERSONA_GARANTE2">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CREDITO_TIPO_CREDITO" Association="Self.FK_CREDITO_TIPO_CREDITO">
+            <End Role="TIPO_CREDITO" EntitySet="TIPO_CREDITO" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CREDITO_USUARIO_RESPONSABLE" Association="Self.FK_CREDITO_USUARIO_RESPONSABLE">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_CREDITO_CREDITO" Association="Self.FK_DETALLE_CREDITO_CREDITO">
+            <End Role="CREDITO" EntitySet="CREDITO" />
+            <End Role="DETALLE_CREDITO" EntitySet="DETALLE_CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_SOCIO" Association="Self.FK_CUENTA_SOCIO">
+            <End Role="SOCIO" EntitySet="SOCIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_SUCURSAL" Association="Self.FK_CUENTA_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_TIPO_CUENTA" Association="Self.FK_CUENTA_TIPO_CUENTA">
+            <End Role="TIPO_CUENTA" EntitySet="TIPO_CUENTA" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_USUARIO_BAJA" Association="Self.FK_CUENTA_USUARIO_BAJA">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_USUARIO_REGISTRA" Association="Self.FK_CUENTA_USUARIO_REGISTRA">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACCION_CUENTA" Association="Self.FK_TRANSACCION_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_CREDITO_USUARIO" Association="Self.FK_DETALLE_CREDITO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="DETALLE_CREDITO" EntitySet="DETALLE_CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_PERSONA" Association="Self.FK_EMPLEADO_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_EMPLEADO" Association="Self.FK_USUARIO_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONA_TIPO_IDENTIFICACION" Association="Self.FK_PERSONA_TIPO_IDENTIFICACION">
+            <End Role="TIPO_IDENTIFICACION" EntitySet="TIPO_IDENTIFICACION" />
+            <End Role="PERSONA" EntitySet="PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIO_PERSONA" Association="Self.FK_SOCIO_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="SOCIO" EntitySet="SOCIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACCION_SUCURSAL" Association="Self.FK_TRANSACCION_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACCION_TIPO_TRANSACCION" Association="Self.FK_TRANSACCION_TIPO_TRANSACCION">
+            <End Role="TIPO_TRANSACCION" EntitySet="TIPO_TRANSACCION" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACCION_USUARIO" Association="Self.FK_TRANSACCION_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TRANSACCION" EntitySet="TRANSACCION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_CooperativaModelStoreContainer" CdmEntityContainer="DB_CooperativaEntities">
+          <EntitySetMapping Name="CREDITO">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.CREDITO">
+              <MappingFragment StoreEntitySet="CREDITO">
+                <ScalarProperty Name="CreditoID" ColumnName="CreditoID" />
+                <ScalarProperty Name="CuentaID" ColumnName="CuentaID" />
+                <ScalarProperty Name="TipoCreditoID" ColumnName="TipoCreditoID" />
+                <ScalarProperty Name="CreditoMonto" ColumnName="CreditoMonto" />
+                <ScalarProperty Name="CreditoActivo" ColumnName="CreditoActivo" />
+                <ScalarProperty Name="CreditoFechaEntrega" ColumnName="CreditoFechaEntrega" />
+                <ScalarProperty Name="CreditoPlazo" ColumnName="CreditoPlazo" />
+                <ScalarProperty Name="CreditoGaranteID1" ColumnName="CreditoGaranteID1" />
+                <ScalarProperty Name="CreditoGaranteID2" ColumnName="CreditoGaranteID2" />
+                <ScalarProperty Name="UsuarioIDResponsable" ColumnName="UsuarioIDResponsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUENTA">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.CUENTA">
+              <MappingFragment StoreEntitySet="CUENTA">
+                <ScalarProperty Name="CuentaID" ColumnName="CuentaID" />
+                <ScalarProperty Name="SocioID" ColumnName="SocioID" />
+                <ScalarProperty Name="CuentaActiva" ColumnName="CuentaActiva" />
+                <ScalarProperty Name="CuentaNotas" ColumnName="CuentaNotas" />
+                <ScalarProperty Name="CuentaSaldo" ColumnName="CuentaSaldo" />
+                <ScalarProperty Name="CuentaFechaRegistro" ColumnName="CuentaFechaRegistro" />
+                <ScalarProperty Name="CuentaFechaBaja" ColumnName="CuentaFechaBaja" />
+                <ScalarProperty Name="UsuarioIDRegistra" ColumnName="UsuarioIDRegistra" />
+                <ScalarProperty Name="UsuarioIDBaja" ColumnName="UsuarioIDBaja" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="TipoCuentaID" ColumnName="TipoCuentaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_CREDITO">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.DETALLE_CREDITO">
+              <MappingFragment StoreEntitySet="DETALLE_CREDITO">
+                <ScalarProperty Name="DetalleCreditoID" ColumnName="DetalleCreditoID" />
+                <ScalarProperty Name="CreditoID" ColumnName="CreditoID" />
+                <ScalarProperty Name="DetalleCreditoNumeroCuota" ColumnName="DetalleCreditoNumeroCuota" />
+                <ScalarProperty Name="DetalleCreditoFechaPago" ColumnName="DetalleCreditoFechaPago" />
+                <ScalarProperty Name="DetalleCreditoFechaPagoEsperado" ColumnName="DetalleCreditoFechaPagoEsperado" />
+                <ScalarProperty Name="DetalleCreditoInteres" ColumnName="DetalleCreditoInteres" />
+                <ScalarProperty Name="DetalleCreditoInteresMora" ColumnName="DetalleCreditoInteresMora" />
+                <ScalarProperty Name="DetalleUsuarioCobra" ColumnName="DetalleUsuarioCobra" />
+                <ScalarProperty Name="DetalleCapitalAmortizado" ColumnName="DetalleCapitalAmortizado" />
+                <ScalarProperty Name="DetalleCreditoNotas" ColumnName="DetalleCreditoNotas" />
+                <ScalarProperty Name="DetalleCapitalPendiente" ColumnName="DetalleCapitalPendiente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.EMPLEADO">
+              <MappingFragment StoreEntitySet="EMPLEADO">
+                <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+                <ScalarProperty Name="EmpleadoEstado" ColumnName="EmpleadoEstado" />
+                <ScalarProperty Name="EmpleadoFechaRegistro" ColumnName="EmpleadoFechaRegistro" />
+                <ScalarProperty Name="EmpleadoFechaBaja" ColumnName="EmpleadoFechaBaja" />
+                <ScalarProperty Name="EmpleadoNotas" ColumnName="EmpleadoNotas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONA">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.PERSONA">
+              <MappingFragment StoreEntitySet="PERSONA">
+                <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+                <ScalarProperty Name="PersonaIdentificacion" ColumnName="PersonaIdentificacion" />
+                <ScalarProperty Name="PersonaNombres" ColumnName="PersonaNombres" />
+                <ScalarProperty Name="PersonaApellidos" ColumnName="PersonaApellidos" />
+                <ScalarProperty Name="PersonaRazonSocial" ColumnName="PersonaRazonSocial" />
+                <ScalarProperty Name="PersonaDireccion" ColumnName="PersonaDireccion" />
+                <ScalarProperty Name="PersonaTelefono" ColumnName="PersonaTelefono" />
+                <ScalarProperty Name="PersonaNatural" ColumnName="PersonaNatural" />
+                <ScalarProperty Name="TipoIdentificacionID" ColumnName="TipoIdentificacionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOCIO">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.SOCIO">
+              <MappingFragment StoreEntitySet="SOCIO">
+                <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+                <ScalarProperty Name="SocioActivo" ColumnName="SocioActivo" />
+                <ScalarProperty Name="SocioFechaRegistro" ColumnName="SocioFechaRegistro" />
+                <ScalarProperty Name="SocioFechaBaja" ColumnName="SocioFechaBaja" />
+                <ScalarProperty Name="SocioNotas" ColumnName="SocioNotas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUCURSAL">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.SUCURSAL">
+              <MappingFragment StoreEntitySet="SUCURSAL">
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="SucursalNombre" ColumnName="SucursalNombre" />
+                <ScalarProperty Name="SucursalDireccion" ColumnName="SucursalDireccion" />
+                <ScalarProperty Name="SucursalCiudad" ColumnName="SucursalCiudad" />
+                <ScalarProperty Name="SucursalActiva" ColumnName="SucursalActiva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CREDITO">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.TIPO_CREDITO">
+              <MappingFragment StoreEntitySet="TIPO_CREDITO">
+                <ScalarProperty Name="TipoCreditoID" ColumnName="TipoCreditoID" />
+                <ScalarProperty Name="NombreTipoCredito" ColumnName="NombreTipoCredito" />
+                <ScalarProperty Name="TipoCreditoNotas" ColumnName="TipoCreditoNotas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CUENTA">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.TIPO_CUENTA">
+              <MappingFragment StoreEntitySet="TIPO_CUENTA">
+                <ScalarProperty Name="TipoCuentaID" ColumnName="TipoCuentaID" />
+                <ScalarProperty Name="TipoCuentaNombre" ColumnName="TipoCuentaNombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_IDENTIFICACION">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.TIPO_IDENTIFICACION">
+              <MappingFragment StoreEntitySet="TIPO_IDENTIFICACION">
+                <ScalarProperty Name="TipoIdentificacionID" ColumnName="TipoIdentificacionID" />
+                <ScalarProperty Name="TipoIdentificacionNombre" ColumnName="TipoIdentificacionNombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_TRANSACCION">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.TIPO_TRANSACCION">
+              <MappingFragment StoreEntitySet="TIPO_TRANSACCION">
+                <ScalarProperty Name="TipoTransaccionID" ColumnName="TipoTransaccionID" />
+                <ScalarProperty Name="TipoTransaccionNombre" ColumnName="TipoTransaccionNombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSACCION">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.TRANSACCION">
+              <MappingFragment StoreEntitySet="TRANSACCION">
+                <ScalarProperty Name="TransaccionID" ColumnName="TransaccionID" />
+                <ScalarProperty Name="TransaccionCuentaID" ColumnName="TransaccionCuentaID" />
+                <ScalarProperty Name="TransaccionFecha" ColumnName="TransaccionFecha" />
+                <ScalarProperty Name="TransaccionMonto" ColumnName="TransaccionMonto" />
+                <ScalarProperty Name="TransaccionActiva" ColumnName="TransaccionActiva" />
+                <ScalarProperty Name="TipoTransaccionID" ColumnName="TipoTransaccionID" />
+                <ScalarProperty Name="TransaccionUsuarioRegistraID" ColumnName="TransaccionUsuarioRegistraID" />
+                <ScalarProperty Name="TransaccionSucursalID" ColumnName="TransaccionSucursalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="UsuarioPassword" ColumnName="UsuarioPassword" />
+                <ScalarProperty Name="UsuarioActivo" ColumnName="UsuarioActivo" />
+                <ScalarProperty Name="UsuarioNotas" ColumnName="UsuarioNotas" />
+                <ScalarProperty Name="UsuarioDiscapacidad" ColumnName="UsuarioDiscapacidad" />
+                <ScalarProperty Name="UsuarioPermisoChat" ColumnName="UsuarioPermisoChat" />
+                <ScalarProperty Name="UsuarioPermisoRecargas" ColumnName="UsuarioPermisoRecargas" />
+                <ScalarProperty Name="UsuarioPermisoGestionarCuentas" ColumnName="UsuarioPermisoGestionarCuentas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISOWS">
+            <EntityTypeMapping TypeName="DB_CooperativaModel.PERMISOWS">
+              <MappingFragment StoreEntitySet="PERMISOWS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
