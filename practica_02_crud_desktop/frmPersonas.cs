@@ -69,5 +69,37 @@ namespace practica_02_crud_desktop
         {
             procesar_busqueda();   
         }
+
+        private void pERSONADataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void pERSONADataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                var persona_actual = this.pERSONABindingSource.Current as PERSONA;
+                if (persona_actual != null)
+                {
+                    frmPersonaDetail detalle = new frmPersonaDetail(persona_actual.PERSONA_ID);
+                    if (detalle.ShowDialog() == DialogResult.OK)
+                    {
+                        cargar_datos(this.txtFiltro.Text);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ningún registro fue seleccionado", "Personas",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error: "
+                    + ex.Message, "Personas", MessageBoxButtons.OK);
+            }
+
+        }
     }
 }
