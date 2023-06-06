@@ -52,6 +52,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.optCedulaRuc = new System.Windows.Forms.RadioButton();
             this.optNombresApellidos = new System.Windows.Forms.RadioButton();
+            this.btnNuevo = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +62,7 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pERSONABindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pERSONABindingNavigator)).BeginInit();
             this.pERSONABindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pERSONADataGridView)).BeginInit();
@@ -88,9 +90,9 @@
             // 
             this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(438, 22);
+            this.btnBuscar.Location = new System.Drawing.Point(438, 26);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(92, 23);
+            this.btnBuscar.Size = new System.Drawing.Size(78, 23);
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.toolTip1.SetToolTip(this.btnBuscar, "Buscar Clientes");
@@ -117,7 +119,7 @@
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem,
             this.pERSONABindingNavigatorSaveItem});
-            this.pERSONABindingNavigator.Location = new System.Drawing.Point(533, 4);
+            this.pERSONABindingNavigator.Location = new System.Drawing.Point(533, -3);
             this.pERSONABindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.pERSONABindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.pERSONABindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -291,6 +293,19 @@
             this.optNombresApellidos.Text = "Nombres y Apellidos";
             this.optNombresApellidos.UseVisualStyleBackColor = true;
             // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevo.Image")));
+            this.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNuevo.Location = new System.Drawing.Point(515, 26);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(78, 23);
+            this.btnNuevo.TabIndex = 8;
+            this.btnNuevo.Text = "Nuevo";
+            this.toolTip1.SetToolTip(this.btnNuevo, "Registrar Nuevo Cliente");
+            this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "PERSONA_ID";
@@ -356,11 +371,26 @@
             // 
             this.pERSONABindingSource.DataSource = typeof(practica_02_crud_desktop.PERSONA);
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
+            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEliminar.Location = new System.Drawing.Point(593, 25);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(78, 23);
+            this.btnEliminar.TabIndex = 9;
+            this.btnEliminar.Text = "Eliminar";
+            this.toolTip1.SetToolTip(this.btnEliminar, "Eliminar Cliente");
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // frmPersonas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.optNombresApellidos);
             this.Controls.Add(this.optCedulaRuc);
             this.Controls.Add(this.label2);
@@ -414,5 +444,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }

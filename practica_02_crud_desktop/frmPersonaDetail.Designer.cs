@@ -39,6 +39,7 @@
             System.Windows.Forms.Label pERSONA_EMAILLabel;
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pERSONA_EMAILTextBox = new System.Windows.Forms.TextBox();
+            this.pERSONABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pERSONA_TELEFONOTextBox = new System.Windows.Forms.TextBox();
             this.pERSONA_DIRECCIONTextBox = new System.Windows.Forms.TextBox();
             this.pERSONA_FECHANACIMIENTODateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -48,7 +49,6 @@
             this.pERSONA_IDTextBox = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.pERSONABindingSource = new System.Windows.Forms.BindingSource(this.components);
             pERSONA_IDLabel = new System.Windows.Forms.Label();
             pERSONA_CEDULA_RUCLabel = new System.Windows.Forms.Label();
             pERSONA_APELLIDOSLabel = new System.Windows.Forms.Label();
@@ -166,6 +166,10 @@
             this.pERSONA_EMAILTextBox.Size = new System.Drawing.Size(200, 20);
             this.pERSONA_EMAILTextBox.TabIndex = 15;
             // 
+            // pERSONABindingSource
+            // 
+            this.pERSONABindingSource.DataSource = typeof(practica_02_crud_desktop.PERSONA);
+            // 
             // pERSONA_TELEFONOTextBox
             // 
             this.pERSONA_TELEFONOTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pERSONABindingSource, "PERSONA_TELEFONO", true));
@@ -217,6 +221,7 @@
             // pERSONA_IDTextBox
             // 
             this.pERSONA_IDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pERSONABindingSource, "PERSONA_ID", true));
+            this.pERSONA_IDTextBox.Enabled = false;
             this.pERSONA_IDTextBox.Location = new System.Drawing.Point(208, 19);
             this.pERSONA_IDTextBox.Name = "pERSONA_IDTextBox";
             this.pERSONA_IDTextBox.Size = new System.Drawing.Size(100, 20);
@@ -241,10 +246,6 @@
             this.btnAceptar.TabIndex = 2;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
-            // 
-            // pERSONABindingSource
-            // 
-            this.pERSONABindingSource.DataSource = typeof(practica_02_crud_desktop.PERSONA);
             // 
             // frmPersonaDetail
             // 

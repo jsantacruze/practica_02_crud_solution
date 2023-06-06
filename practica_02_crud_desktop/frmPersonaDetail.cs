@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Hosting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace practica_02_crud_desktop
     {
         private long _persona_id;
         private bool _is_new = false;
+        private PERSONA _persona;
 
         /// <summary>
         /// Crea una nueva persona
@@ -47,6 +49,7 @@ namespace practica_02_crud_desktop
                     //var persona = context.PERSONA
                     //    .Where(p => p.PERSONA_ID == _persona_id).FirstOrDefault();
                     pERSONABindingSource.DataSource = persona;
+                    this._persona = persona;
                 }
             }
             catch (Exception ex)
@@ -60,7 +63,11 @@ namespace practica_02_crud_desktop
         {
             try
             {
-
+                this._persona = new PERSONA();
+                this._persona.PERSONA_FECHANACIMIENTO = DateTime.Now;
+                this._persona.PERSONA_TELEFONO = string.Empty;
+                this._persona.PERSONA_DIRECCION = string.Empty;
+                pERSONABindingSource.DataSource = this._persona;
             }
             catch (Exception ex)
             {
@@ -102,6 +109,44 @@ namespace practica_02_crud_desktop
             return result;
         }
 
+        private void actualizar()
+        {
+            try
+            {
+                using (Cooperativa_2023Entities context =
+                    new Cooperativa_2023Entities())
+                {
+                    context.PERSONA.Attach(this._persona);
+                    context.Entry(this._persona).State = System.Data.Entity.EntityState.Modified;
+                    int result = context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error: "
+                    + ex.Message, "Personas", MessageBoxButtons.OK);
+            }
+        }
+
+        private void crear()
+        {
+            try
+            {
+                using (Cooperativa_2023Entities context =
+                    new Cooperativa_2023Entities())
+                {
+                    context.PERSONA.Attach(this._persona);
+                    context.Entry(this._persona).State = System.Data.Entity.EntityState.Added;
+                    int result = context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error: "
+                    + ex.Message, "Personas", MessageBoxButtons.OK);
+            }
+        }
+
         private void frmPersonaDetail_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.DialogResult == DialogResult.OK)
@@ -109,6 +154,14 @@ namespace practica_02_crud_desktop
                 if (validar_interfaz())
                 {
                     //guardar los datos
+                    if (!_is_new)
+                    {
+                        this.actualizar();
+                    }
+                    else
+                    {
+                        this.crear();
+                    }
                 }
                 else
                 {
