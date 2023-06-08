@@ -98,6 +98,18 @@
     <Compile Include="frmPersonas.Designer.cs">
       <DependentUpon>frmPersonas.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTiposCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTiposCuenta.Designer.cs">
+      <DependentUpon>frmTiposCuenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="PERSONA.cs">
       <DependentUpon>Cooperativa2023Model.tt</DependentUpon>
     </Compile>
@@ -127,6 +139,13 @@
     <EmbeddedResource Include="frmPersonas.resx">
       <DependentUpon>frmPersonas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTiposCuenta.resx">
+      <DependentUpon>frmTiposCuenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -146,6 +165,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\PERSONA.datasource" />
+    <None Include="Properties\DataSources\TIPO_CUENTA.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

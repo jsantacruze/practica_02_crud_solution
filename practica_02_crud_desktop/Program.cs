@@ -16,7 +16,7 @@ namespace practica_02_crud_desktop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmPersonas());
+            Application.Run(new frmPrincipal());
         }
     }
 }
