@@ -104,6 +104,12 @@
     <Compile Include="frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTipoCuentaDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoCuentaDetalle.Designer.cs">
+      <DependentUpon>frmTipoCuentaDetalle.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTiposCuenta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoCuentaDetalle.resx">
+      <DependentUpon>frmTipoCuentaDetalle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTiposCuenta.resx">
       <DependentUpon>frmTiposCuenta.cs</DependentUpon>

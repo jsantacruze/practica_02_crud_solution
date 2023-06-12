@@ -70,10 +70,6 @@ namespace practica_02_crud_desktop
             procesar_busqueda();   
         }
 
-        private void pERSONADataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
         private void pERSONADataGridView_DoubleClick(object sender, EventArgs e)
         {
             try

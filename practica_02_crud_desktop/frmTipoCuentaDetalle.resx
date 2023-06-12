@@ -117,45 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="tCUENTA_DESCRIPCIONLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="tCUENTA_IDLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <metadata name="tIPO_CUENTABindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnEliminar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAALtJREFUOE+1
-        0z0OAVEYRuHZgJ+wBBUVe6BkDejYAiVboGURNCMsg4ZQaiRYAOfzmWreGwpO8iTvJJOZYu5E/6yL+M32
-        V7VwwiPgiCZkJZxRfV3parB77N5UV6i3KhekysMe8qkbcj7T3ZHxKcvCHhBsh7JPWQVbn7oV6j5lDdhn
-        DTZH26esg5lP3RgDn7IhRj51fUx8yqbo+dTZSVz4lC0RPImWnYUD1kj+g8QGewTPQFIR9iWUAn5ZFD0B
-        EfAw669tqvoAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnNuevo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAcJJREFUOE+F
-        kt0rQ2Ecxx83cim5V/4F/4AiSdmu5ILcKqW4QBGN5HgZuXAhwo23HYSaeRlhdZi3lIydDRs2c2xrUxvO
-        nHN+dp6e42TO+NS356nzfL7P06+DFMqMTF4JZS/QSmnfcVEFTWeSo9r0rLrmniIfoJVpxi+10uxjoWE3
-        ixz/jdHsnoY0rJ5x4AwJ0L7IBpIl2UT5yX8FnqiES9polqsYOsghmspfBTZnGKZsPpwR6z3UTl7Yiaby
-        V0Eq8lmiqSgFb7wApkO/ZuRvMv1m1yzRVJSCj4QIa+fcj7gCMSwqdC6xl0RTUQpEScJCarzBN+AFEV5e
-        ebh9jruJpqIUfIrSr//Ak5SHrY9AbQXBuBeFLstzombimkIAGURXC/hPEWzXoe8wbBgGNx5gxJ6A0VMR
-        jnwSXgf2Y0LV+FUb0dMPcfcqBAZLAEtyXuLwva+f9zJEVwtS8YXfoXcngm+W5eQD8bp5I0Hjgs9J9PQF
-        QnIm1Ib2C+pm7raJjlD3iovWmr6Hi4PpmINBWwxL8s3y2rEejFaPOXRER6jceJpbTJ3kp6bHfKezOiL6
-        5nn3ZNPig6Nl2e9vMHkPKkcv9Agh9AU1rJgmEg6ThQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnBuscar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAaxJREFUOE9j
-        IARSZl92KF1xY1rR0utLgLg3ae5FdagUfuA97bBg9Zrb2/bd+vzt/od//0H47vu//9eff/e2eNmN2Q4N
-        +1mgSjFBQ8N/puq1t/feevMHrBEdX3j642/J8mvToMoxQeaiyxlnHn//jU0zDK8/9/Z1+NSzmhAdaKBl
-        49112DQh4zvv/v4vXHK9B6oFFfRtv78fmyZ0XLvm1nyoFlTQvvnuFmwakPE9IC5een0KVAsqyFt8renq
-        y19YNcLwrusfvyRMP+8A1YIKPCed4GvaePcdNo0gfOvtn/8Vq26ugypHBcD45Uief2Nry+53fxo33Hl/
-        9RWqS04++v6ncvXNPS4dZ/ihWhAAqJknZeGtg/1Hvv+Ln3tjte/MzVyly67XtW+5v7V1073jQFety196
-        LZnh/39GqBYECOg/L5C+5M6+Scd//k+ce32z8cwzrFApwiBw+kWx9MV3T0wGak5acHN3aMNVNqgUYRDU
-        f0Yya+n9c9NO/f6fuujWfr/OI7xQKeJA7Jwrs6ad/vM/c8ndE6AMBBUmHoRPuqIfM+PKTJA3oEIkAAYG
-        ABCOnMrfJ2mcAAAAAElFTkSuQmCC
-</value>
-  </data>
+  <metadata name="tCUENTA_IDLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="tCUENTA_DESCRIPCIONLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <metadata name="tIPO_CUENTABindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

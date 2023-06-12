@@ -35,6 +35,8 @@
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.pERSONABindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -52,7 +54,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.optCedulaRuc = new System.Windows.Forms.RadioButton();
             this.optNombresApellidos = new System.Windows.Forms.RadioButton();
-            this.btnNuevo = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,7 +63,6 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pERSONABindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pERSONABindingNavigator)).BeginInit();
             this.pERSONABindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pERSONADataGridView)).BeginInit();
@@ -98,6 +98,32 @@
             this.toolTip1.SetToolTip(this.btnBuscar, "Buscar Clientes");
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevo.Image")));
+            this.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNuevo.Location = new System.Drawing.Point(515, 26);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(78, 23);
+            this.btnNuevo.TabIndex = 8;
+            this.btnNuevo.Text = "Nuevo";
+            this.toolTip1.SetToolTip(this.btnNuevo, "Registrar Nuevo Cliente");
+            this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
+            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEliminar.Location = new System.Drawing.Point(593, 25);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(78, 23);
+            this.btnEliminar.TabIndex = 9;
+            this.btnEliminar.Text = "Eliminar";
+            this.toolTip1.SetToolTip(this.btnEliminar, "Eliminar Cliente");
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // pERSONABindingNavigator
             // 
@@ -259,7 +285,6 @@
             this.pERSONADataGridView.ReadOnly = true;
             this.pERSONADataGridView.Size = new System.Drawing.Size(780, 387);
             this.pERSONADataGridView.TabIndex = 4;
-            this.pERSONADataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pERSONADataGridView_CellDoubleClick);
             this.pERSONADataGridView.DoubleClick += new System.EventHandler(this.pERSONADataGridView_DoubleClick);
             // 
             // label2
@@ -292,19 +317,6 @@
             this.optNombresApellidos.TabStop = true;
             this.optNombresApellidos.Text = "Nombres y Apellidos";
             this.optNombresApellidos.UseVisualStyleBackColor = true;
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevo.Image")));
-            this.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNuevo.Location = new System.Drawing.Point(515, 26);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(78, 23);
-            this.btnNuevo.TabIndex = 8;
-            this.btnNuevo.Text = "Nuevo";
-            this.toolTip1.SetToolTip(this.btnNuevo, "Registrar Nuevo Cliente");
-            this.btnNuevo.UseVisualStyleBackColor = true;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -370,19 +382,6 @@
             // pERSONABindingSource
             // 
             this.pERSONABindingSource.DataSource = typeof(practica_02_crud_desktop.PERSONA);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(593, 25);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(78, 23);
-            this.btnEliminar.TabIndex = 9;
-            this.btnEliminar.Text = "Eliminar";
-            this.toolTip1.SetToolTip(this.btnEliminar, "Eliminar Cliente");
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // frmPersonas
             // 
