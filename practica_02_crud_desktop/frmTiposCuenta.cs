@@ -10,9 +10,8 @@ using System.Windows.Forms;
 
 namespace practica_02_crud_desktop
 {
-    public partial class frmTiposCuenta : Form
+    public partial class frmTiposCuenta : frmBase
     {
-        private string _filtro = string.Empty;
 
         public frmTiposCuenta()
         {

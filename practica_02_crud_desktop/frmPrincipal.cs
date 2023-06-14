@@ -30,5 +30,12 @@ namespace practica_02_crud_desktop
             form.MdiParent = this;
             form.Show();
         }
+
+        private void sucursalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSucursales form = new frmSucursales();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }

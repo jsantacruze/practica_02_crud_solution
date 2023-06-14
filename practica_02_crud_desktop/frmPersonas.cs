@@ -10,9 +10,8 @@ using System.Windows.Forms;
 
 namespace practica_02_crud_desktop
 {
-    public partial class frmPersonas : Form
+    public partial class frmPersonas : frmBase
     {
-        private string _filtro = string.Empty;
         public frmPersonas()
         {
             InitializeComponent();

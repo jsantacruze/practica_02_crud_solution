@@ -80,6 +80,12 @@
     <Compile Include="EMPLEADO_SUCURSAL.cs">
       <DependentUpon>Cooperativa2023Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="frmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBase.Designer.cs">
+      <DependentUpon>frmBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,18 @@
     <Compile Include="frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSucursalDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSucursalDetail.Designer.cs">
+      <DependentUpon>frmSucursalDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSucursales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSucursales.Designer.cs">
+      <DependentUpon>frmSucursales.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTipoCuentaDetalle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +137,7 @@
     <Compile Include="PERSONA.cs">
       <DependentUpon>Cooperativa2023Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="PERSONA.partial.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SOCIO.cs">
@@ -148,13 +167,18 @@
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSucursalDetail.resx">
+      <DependentUpon>frmSucursalDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSucursales.resx">
+      <DependentUpon>frmSucursales.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTipoCuentaDetalle.resx">
       <DependentUpon>frmTipoCuentaDetalle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTiposCuenta.resx">
       <DependentUpon>frmTiposCuenta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -173,7 +197,9 @@
       <DependentUpon>Cooperativa2023Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\EMPLEADO.datasource" />
     <None Include="Properties\DataSources\PERSONA.datasource" />
+    <None Include="Properties\DataSources\SUCURSAL.datasource" />
     <None Include="Properties\DataSources\TIPO_CUENTA.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
